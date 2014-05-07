@@ -5,7 +5,7 @@ pygame.init()
 DISPLAYSURF = pygame.display.set_mode((400, 400))
 
 
-pygame.display.set_caption('Hello World!')
+pygame.display.set_caption('Interactive Floating Point Converter')
 
 
 DISPLAYSURF.fill(( 200, 200, 200))
