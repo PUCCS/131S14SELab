@@ -1,5 +1,11 @@
 load 'Rational.rb'
 
+<<<<<<< HEAD
+=======
+sign = "1"
+excess = "001"
+mantissa = "1101"
+>>>>>>> FETCH_HEAD
 
 class Notation
 
@@ -58,6 +64,12 @@ class Notation
 					iterator += 1
 				end
 			end		
+<<<<<<< HEAD
+=======
+    
+		puts number
+    return number
+>>>>>>> FETCH_HEAD
 		else
 			mantissa.insert(excess, ".")
 			index = mantissa.index(".")
@@ -70,6 +82,11 @@ class Notation
 					iterator += 1
 				end
 			end
+<<<<<<< HEAD
+=======
+		puts number
+    return number
+>>>>>>> FETCH_HEAD
 		end
 		if return_type == "float"
 			return mantissa[0..4]
@@ -92,9 +109,40 @@ end
     converted = strnum.to_i(base=2)
   end
   
-end
+  
 #################################
 
+#fraction returns an array that looks like this [whole number, numerator, denominator]
+  def self.fraction(num)
+    decimal = num % 1
+    whole = num - decimal
+    numerator = 0
+    denominator = 1
+    until false:
+      if decimal == numerator.to_f / denominator.to_f
+        #uncomment if you want to see output
+        #puts [whole, numerator, denominator]
+        return [whole, numerator, denominator]
+      else
+        if numerator < denominator
+          numerator += 1
+        else
+          denominator += 1
+          numerator = 0
+        end
+      end
+    end
+  end
+end
 
+
+<<<<<<< HEAD
+=======
+Notation.sign(sign)
+Notation.excess(excess)
+num = Notation.mantissa(Notation.excess(excess), mantissa)
+
+Notation.fraction(num)
+>>>>>>> FETCH_HEAD
 #################################
 
