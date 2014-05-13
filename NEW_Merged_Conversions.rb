@@ -1,15 +1,14 @@
 
 sign = "1"
 excess = "101"
-mantissa = "1010"
-
+mantissa = "1111"
 
 class Notation
 
 ################################
 	
 	def self.sign(sign)
-		if sign == "1":
+		if sign == "1"
 			sign = "+"
 		else
 			sign = "-"
@@ -38,7 +37,8 @@ class Notation
 
 #################################
 	
-	def self.mantissa(excess, mantissa)
+  def self.mantissa(excess, mantissa)
+		puts excess
 		number = 0
 		iterator = 1
 		if excess <= 0
@@ -47,31 +47,42 @@ class Notation
 				if i == "1"
 					number += 2 ** -iterator
 					iterator += 1
-					puts number
 				else
 					iterator += 1
 				end
 			end		
+		puts number
 		else
 			mantissa.insert(excess, ".")
 			index = mantissa.index(".")
-			mantissa[index..4].split('').each do |i|
+			puts mantissa[index..4]
+			mantissa[(index + 1)..4].split('').each do |i|
 				if i == "1"
 					number += 2 ** -iterator
 					iterator += 1
-					puts number
 				else
 					iterator += 1
 				end
 			end
+		puts number
 		end
 	end
+  
+#################################
+  
+  def self.dec2binary(num)
+    converted = "%08b" % num.to_i
+  end
+  
+  
+  def self.binary2dec(num)
+    strnum = num.to_s
+    converted = strnum.to_i(base=2)
+  end
+  
 end
-
 #################################
 
-Notation.sign(sign)
-Notation.excess(excess)
-Notation.mantissa(Notation.excess(excess), mantissa)
+
 
 #################################

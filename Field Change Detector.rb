@@ -83,7 +83,7 @@ def set_fraction()
 end
 def set_decimal
 
-	@decimal = edit_line width: 75
+	@decimal = para "0"#edit_line width: 75# para "0"
 	@decimal.move(10, 225)
 	
 end
