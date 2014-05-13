@@ -1,7 +1,5 @@
+load 'Rational.rb'
 
-sign = "1"
-excess = "101"
-mantissa = "1111"
 
 class Notation
 
@@ -9,9 +7,19 @@ class Notation
 	
 	def self.sign(sign)
 		if sign == "1"
-			sign = "+"
-		else
 			sign = "-"
+		else
+			sign = "+"
+		end
+	end
+
+##################################
+
+	def self.reverse_sign(operand)
+		if operand == "+"
+			operand = 0
+		else
+			operand = 1
 		end
 	end
 
@@ -37,8 +45,7 @@ class Notation
 
 #################################
 	
-  def self.mantissa(excess, mantissa)
-		puts excess
+  def self.mantissa(excess, mantissa, return_type)
 		number = 0
 		iterator = 1
 		if excess <= 0
@@ -51,11 +58,10 @@ class Notation
 					iterator += 1
 				end
 			end		
-		puts number
 		else
 			mantissa.insert(excess, ".")
 			index = mantissa.index(".")
-			puts mantissa[index..4]
+			#puts mantissa[0..4]
 			mantissa[(index + 1)..4].split('').each do |i|
 				if i == "1"
 					number += 2 ** -iterator
@@ -64,14 +70,20 @@ class Notation
 					iterator += 1
 				end
 			end
-		puts number
 		end
-	end
+		if return_type == "float"
+			return mantissa[0..4]
+		elsif return_type == "fraction"
+			return number.to_f.to_fraction
+		elsif return_type == "answer"
+			return number.to_f + excess
+		end
+end
   
+
 #################################
-  
   def self.dec2binary(num)
-    converted = "%08b" % num.to_i
+    converted = "%04b" % num.to_i
   end
   
   
@@ -84,5 +96,5 @@ end
 #################################
 
 
-
 #################################
+
