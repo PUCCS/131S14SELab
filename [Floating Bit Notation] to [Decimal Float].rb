@@ -66,13 +66,12 @@ class Notation
 			end
 		end
 	end
-
-
-
-
-
 end
+
+#################################
 
 Notation.sign(sign)
 Notation.excess(excess)
 Notation.mantissa(Notation.excess(excess), mantissa)
+
+#################################
