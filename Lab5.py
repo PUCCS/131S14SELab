@@ -1,14 +1,11 @@
-
-
 W = input('Whole Part > ')
+I = int(W)
 #F = input('Fractional Part > ')
-
-
 # Whole number to binary.
 
-PositionOne = W % 2
+PositionOne = I % 2
 
-a = W / 2
+a = I / 2
 
 PositionTwo = a % 2
 
@@ -16,8 +13,12 @@ b = a / 2
 
 PositionThree = b % 2
 
-print(PositionOne,PositionTwo,PositionThree)
+c = b / 2
 
+P4 = c % 2
+
+print(int(P4),int(PositionThree),int(PositionTwo),int(PositionOne))
 
 # Fractional part to binary.
 
+F = input('Fractional Part > ')
