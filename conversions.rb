@@ -4,19 +4,13 @@
 #Johnny
 
 def dec2binary(num)
-  num.to_i
-  converted = "%08b" % num
-  puts converted
-  return converted
+  converted = "%08b" % num.to_i
 end
 
 def binary2dec(num)
   strnum = num.to_s
   converted = strnum.to_i(base=2)
-  puts converted
-  return
 end
-
 
 
 def fp2dec(num) #takes string or int or float
@@ -30,3 +24,5 @@ def fp2dec(num) #takes string or int or float
 end
 
 
+puts dec2binary(15)
+puts binary2dec(1111)
