@@ -1,7 +1,7 @@
 
 sign = "1"
-excess = "101"
-mantissa = "1111"
+excess = "001"
+mantissa = "1101"
 
 class Notation
 
@@ -51,7 +51,9 @@ class Notation
 					iterator += 1
 				end
 			end		
+    
 		puts number
+    return number
 		else
 			mantissa.insert(excess, ".")
 			index = mantissa.index(".")
@@ -65,6 +67,7 @@ class Notation
 				end
 			end
 		puts number
+    return number
 		end
 	end
   
@@ -80,9 +83,36 @@ class Notation
     converted = strnum.to_i(base=2)
   end
   
-end
+  
 #################################
 
+#fraction returns an array that looks like this [whole number, numerator, denominator]
+  def self.fraction(num)
+    decimal = num % 1
+    whole = num - decimal
+    numerator = 0
+    denominator = 1
+    until false:
+      if decimal == numerator.to_f / denominator.to_f
+        #uncomment if you want to see output
+        #puts [whole, numerator, denominator]
+        return [whole, numerator, denominator]
+      else
+        if numerator < denominator
+          numerator += 1
+        else
+          denominator += 1
+          numerator = 0
+        end
+      end
+    end
+  end
+end
 
 
+Notation.sign(sign)
+Notation.excess(excess)
+num = Notation.mantissa(Notation.excess(excess), mantissa)
+
+Notation.fraction(num)
 #################################
