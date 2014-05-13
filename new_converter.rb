@@ -1,4 +1,37 @@
 
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#Adds a 'to_fraction' method to Float. Eg. 0.5.to_fraction => [1,2]
+#http://www.dzone.com/snippets/decimal-fraction-ruby
+
+class Float
+  def number_decimal_places
+    self.to_s.length-2
+  end
+  
+  def to_fraction
+    higher = 10**self.number_decimal_places
+    lower = self*higher
+
+    gcden = greatest_common_divisor(higher, lower)
+
+    return (lower/gcden).round, (higher/gcden).round
+  end
+  
+private
+
+  def greatest_common_divisor(a, b)
+     while a%b != 0
+       a,b = b.round,(a%b).round
+     end 
+     return b
+  end
+end
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
+
+
+
 class Notation
 
 ############Floating Point Notation to Decimal################
@@ -62,15 +95,11 @@ class Notation
 	end
 
 #################################
-	
-	def self.reverse_mantissa(decimal)
-		return "SWAG"
 
-#################################
-
-  def self.mantissa(excess, mantissa) #Converts the given mantissa to fraction
+  def self.mantissa(excess, mantissa, return_type) #Converts the given mantissa to fraction
 		number = 0                    #or point decimal form.
 		iterator = 1
+		excess = excess.to_i
 		if excess <= 0
 			mantissa = "." + ("0" * -excess) + mantissa
 			mantissa[1..4].split('').each do |i|
@@ -94,6 +123,13 @@ class Notation
 				end
 			end #Outputs are ints. (number)
 		end     #Excess + Number gives the final decimal form
+		if return_type == "float"
+			return mantissa[0..4]
+		elsif return_type == "fraction"
+			return number.to_f.to_fraction
+		elsif return_type == "answer"
+			return number.to_f + excess
+		end
 	end			#Excess[0..4] gives the moved decimal form of the mantissa.
 
 ###################################
@@ -106,14 +142,14 @@ class Notation
 ##########################
 
   def self.dec2binary(num) #Converts a decimal to binary.
-    converted = "%08b" % num.to_i
+    converted = "%04b" % num.to_i
     converted = converted.to_s
   end #Output is a string.
   
 ##########################
 
   def self.binary2dec(num) #Converts binary to decimal.
-    converted = strnum.to_s.to_i(2).to_s
+    converted = num.to_s.to_i(2).to_s
   end #Output is a string.
 
 ##########################

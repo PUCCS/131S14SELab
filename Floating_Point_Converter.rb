@@ -1,5 +1,5 @@
 # Ruby Shoes Versions of GUI
-load 'NEW_Merged_Conversions.rb'
+load 'new_converter.rb'
 
 def set_floating_point()
 	@sign_bit = edit_line width: 15
@@ -121,15 +121,23 @@ def change_mantissa()
 	
 	@mantissa.change() do
 	
-		if @mantissa.text.length == 4
+		if @mantissa.text.length == 4 and @mantissa.text != "0000"
 			@like_scientific_numerator.text = Notation.binary2dec(@mantissa.text)
 			change_like_scientific()
+		
+		elsif @mantissa.text == "0000"
+			@fraction_whole_number.text = @like_scientific_sign.text + "0"
+			@fraction_numerator.text = "0"
+			@fraction_denominator.text = "0"
+			@decimal.text = "0.0"
 		end
 	end
 	
 	@like_scientific_numerator.change() do
-		@mantissa.text = Notation.dec2binary(@like_scientific_numerator.text)
-		change_like_scientific()
+		if @like_scientific_numerator.text.length != 0
+			@mantissa.text = Notation.dec2binary(@like_scientific_numerator.text)
+			change_like_scientific()
+		end
 	end
 	
 end
@@ -143,14 +151,24 @@ def change_like_scientific()
 	end
 	
 end
-
 def change_fraction()
 	@fraction_whole_number.text = change_answer.to_i
-	@fraction_numerator.text = Notation.mantissa(Notation.excess(@exponent.text), @mantissa.text, "fraction")[0]
-	@fraction_denominator.text = Notation.mantissa(Notation.excess(@exponent.text), @mantissa.text, "fraction")[1]
-	
+	if @exponent.text == "000"
+		@fraction_whole_number.text = @like_scientific_sign.text + "0"
+		@fraction_numerator.text = "0"
+		@fraction_denominator.text = "0"
+		@decimal.text = "0.0"
+	end
+	if @like_scientific_numerator.text == "8"
+		@fraction_numerator.text = "0"
+		@fraction_denominator.text = "0"
+		
+	else
+		@fraction_numerator.text = Notation.mantissa(Notation.excess(@exponent.text), @mantissa.text, "fraction")[0]
+		@fraction_denominator.text = Notation.mantissa(Notation.excess(@exponent.text), @mantissa.text, "fraction")[1]
+		
+	end
 end
-
 def change_answer()
 	if @sign_bit.text == "1"
 		num = (Notation.mantissa(Notation.excess(@exponent.text), @mantissa.text, "answer").to_f * -1).to_s
@@ -173,4 +191,4 @@ Shoes.app do
 	
 
 
- end
+end
